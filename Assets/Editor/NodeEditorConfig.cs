@@ -16,30 +16,20 @@ namespace KeyZarNodeEditor
 		public Node SelectedNode => outNode;
 		private Plug outPlug = null;
 		public Plug SelectedPlug => outPlug;
-		//private SerializedObject serializedObject;
-		//private SerializedProperty serializedNodes;
 
 		private void OnEnable()
 		{
 			outNode = null;
 			outPlug = null;
-			// needed?
-			//hideFlags = HideFlags.HideAndDontSave;
 			hideFlags = HideFlags.None;
-			//RefreshSerialized();
 		}
-
-		//private void RefreshSerialized(){
-  //          serializedObject = new SerializedObject(this);
-  //          serializedNodes = serializedObject.FindProperty("nodes");
-		//}
 
 		public void DrawNodes(Vector2 canvasOffset, GUIStyle nodeStyle, Texture2D plugUnconnected, Texture2D plugConnected)
 		{
 			int i = 0;
 			foreach (Node node in nodes) {
 				node.posOffset = canvasOffset;
-				node.Draw(nodeStyle, plugUnconnected, plugConnected);//, serializedNodes.GetArrayElementAtIndex(i));
+				node.Draw(nodeStyle, plugUnconnected, plugConnected);
 				++i;
 			}
 		}
@@ -70,7 +60,6 @@ namespace KeyZarNodeEditor
 				 },
 				 type);
 			nodes.Add(newNode);
-			//RefreshSerialized();
 		}
 
 		public void UpdateNodeTypeReferences()
@@ -128,33 +117,38 @@ namespace KeyZarNodeEditor
 		public void DeleteNode(Node node)
 		{
 			Undo.RegisterCompleteObjectUndo(this, "delete node");
-			int idx = nodes.IndexOf(node);
+			int NodeIdx = nodes.IndexOf(node);
 
 			nodes.Remove(node);
-			for (int i = connections.Count - 1; i >= 0; --i)
-			{
-				if (connections[i].inNode == idx || connections[i].outNode == idx)
-				{
-					PlugConnection con = connections[i];
-					if (connections[i].inNode == idx) GetOutPlug(connections[i].outNode, con.outPlug).connected = false;
-					if (connections[i].outNode == idx) GetInPlug(connections[i].inNode, con.inPlug).connected = false;
+			for (int i = connections.Count - 1; i >= 0; --i) {
+				PlugConnection con = connections[i];
+				if (con.inNode == NodeIdx || con.outNode == NodeIdx) {
+                    // these lead to idx out of bouds exception here
+					//if (con.inNode == NodeIdx) { 
+					//	GetOutPlug(con).connected = false; 
+					//}
+					//if (con.outNode == NodeIdx) { 
+					//	GetInPlug(con).connected = false; 
+					//}
 					connections.RemoveAt(i);
 				}
-				else if (connections[i].inNode > idx) connections[i].inNode = connections[i].inNode - 1;
-				else if (connections[i].outNode > idx) connections[i].outNode = connections[i].outNode - 1;
+				if (con.inNode > NodeIdx) {
+					con.inNode -= 1;
+				}
+				if (con.outNode > NodeIdx) {
+					con.outNode -= 1;
+				}
 			}
-			//RefreshSerialized();
-			//foreach (PlugConnection connection in toRemove) connections.Remove(connection);
 		}
 
-		public Plug GetOutPlug(int nodeIdx, int plugIdx)
+		public Plug GetOutPlug(PlugConnection connection)
 		{
-			return nodes[nodeIdx].OutPlugs[plugIdx];
+			return nodes[connection.outNode].OutPlugs[connection.outPlug];
 		}
 
-		public Plug GetInPlug(int nodeIdx, int plugIdx)
+		public Plug GetInPlug(PlugConnection connection)
 		{
-			return nodes[nodeIdx].InPlugs[plugIdx];
+			return nodes[connection.inNode].InPlugs[connection.inPlug];
 		}
 	}
 
@@ -170,7 +164,6 @@ namespace KeyZarNodeEditor
 		public Vector2 tan1;
 		public Vector2 tan2;
 		public Vector2 inPos;
-
 
 		public PlugConnection(
 			int outNode,

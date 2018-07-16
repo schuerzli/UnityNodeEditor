@@ -146,7 +146,7 @@ namespace KeyZarNodeEditor
                 tan2,
                 connectionColor,
                 connectionTex,
-                1
+                1            
             );
         }
 

@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEditor;
-using KeyZarNodeEditor;
-
 
 namespace KeyZarNodeEditor
 {
@@ -143,7 +141,6 @@ namespace KeyZarNodeEditor
             
 			foreach (FieldInfo fieldInfo in TargetType.GetFields())
 			{
-				//Debug.Log(fieldInfo.FieldType);
 				if (fieldInfo.FieldType == typeof(float))
 				{
 					EditorGUIUtility.labelWidth = configVarRect.width / 2;
@@ -289,7 +286,7 @@ namespace KeyZarNodeEditor
 					GUIStyle style = new GUIStyle(EditorStyles.textField);
 					style.normal.textColor = new Color(0.15f, 0.15f, 0.15f);
 					GUI.Label(
-						GetOffsetRect(pos),
+						pos,
 						content,
 						style);
 					return true;
@@ -304,7 +301,7 @@ namespace KeyZarNodeEditor
 					GUIStyle style = new GUIStyle(EditorStyles.textField);
 					style.normal.textColor = new Color(0.15f, 0.15f, 0.15f);
 					GUI.Label(
-						GetOffsetRect(pos),
+						pos,
 						content,
 						style);
 					return true;

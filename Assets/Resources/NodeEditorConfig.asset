@@ -11,5 +11,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 957122a2362f24ddc83239e785d3d542, type: 3}
   m_Name: NodeEditorConfig
   m_EditorClassIdentifier: 
-  nodes: []
+  nodes:
+  - displayName: MinimalPlugTest
+    transform:
+      serializedVersion: 2
+      x: 106
+      y: 176
+      width: 150
+      height: 100
+    targetTypeName: MinimalPlugTest
+    targetAssemblyQualifiedTypeName: MinimalPlugTest, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    serializedTarget: 
+    posOffset: {x: 0, y: 0}
+  - displayName: MinimalPlugTest
+    transform:
+      serializedVersion: 2
+      x: 529
+      y: 166
+      width: 150
+      height: 100
+    targetTypeName: MinimalPlugTest
+    targetAssemblyQualifiedTypeName: MinimalPlugTest, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    serializedTarget: 
+    posOffset: {x: 0, y: 0}
   connections: []

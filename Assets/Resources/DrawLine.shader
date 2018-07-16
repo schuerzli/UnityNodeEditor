@@ -6,7 +6,8 @@ Shader "UI/DrawLine"
     {
         [PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
         _Color ("Tint", Color) = (1,1,1,1)
-        _Width ("Width", Range(0.00001, 0.1)) = 0.001
+        _Width ("Width", Range(1, 100)) = 2
+        _Softness ("Softness", Range(0, 1)) = 0.5
 
         _StencilComp ("Stencil Comparison", Float) = 8
         _Stencil ("Stencil ID", Float) = 0
@@ -50,6 +51,8 @@ Shader "UI/DrawLine"
         {
             Name "Default"
         CGPROGRAM
+// Upgrade NOTE: excluded shader from DX11, OpenGL ES 2.0 because it uses unsized arrays
+#pragma exclude_renderers d3d11 gles
             #pragma vertex vert
             #pragma fragment frag
             #pragma target 2.0
@@ -80,8 +83,11 @@ Shader "UI/DrawLine"
             fixed4 _Color;
             fixed4 _TextureSampleAdd;
             float4 _ClipRect;
+            float4 _TexSize;
             float _Width;
-
+            float _Softness;
+            sampler2D _MainTex;
+            
             v2f vert(appdata_t v)
             {
                 v2f OUT;
@@ -96,50 +102,65 @@ Shader "UI/DrawLine"
                 return OUT;
             }
 
-            sampler2D _MainTex;
-            float4 _MainTex_TexelSize;
+            float2x2 rotate2D(float angle){
+                return float2x2(
+                    cos(angle), -sin(angle),
+                    sin(angle), cos(angle));
+            }
 
             float distFromLine(float2 p, float2 pLine1, float2 pLine2, float maxDist){
-                if (
-                   p.x > min(pLine1.x, pLine2.x) - maxDist
-                && p.x < max(pLine1.x, pLine2.x) + maxDist
-                && p.y > min(pLine1.y, pLine2.y) - maxDist
-                && p.y < max(pLine1.y, pLine2.y) + maxDist
-                ) {
-                    float dist;
-                    //dist = length(pLine1 - p);
-                    dist = 
-                        abs((pLine2.x - pLine1.x)*(pLine1.y - p.y) - (pLine1.x - p.x)*(pLine2.y - pLine1.y)) 
-                        / length(pLine1 - pLine2);
+                float dist;
+                float2 p1P2 = pLine2 - pLine1;
+                float2 p1P2N = normalize(p1P2);
+                float lineXDir = dot(p1P2N, float2(1, 0));
+                float p1PDir = dot(normalize(p - pLine1), p1P2N);
+                float p2PDir = dot(normalize(p - pLine2), p1P2N);
 
-                    return dist;
+                if (p1PDir * lineXDir > 0 && p2PDir * lineXDir < 0 
+                    || p1PDir * lineXDir < 0 && p2PDir * lineXDir > 0 
+                    || lineXDir == 0 && p.y > pLine1.y && p.y < pLine2.y
+                    || lineXDir == 0 && p.y < pLine1.y && p.y > pLine2.y
+                ){
+                    float2 p3 = pLine1 + dot(p1P2N, p - pLine1) * p1P2N;
+                    return length(p3 - p);
                 }
                 return 1;
             }
 
             float points[200];
             float numPts;
+            static float pts[] = {
+                0.1, 0.5,
+                0.9, 0.5,
+                0.5, 0.1,
+                0.5, 0.9
+            };
 
             fixed4 frag(v2f IN) : SV_Target {
-                half4 color = (tex2D(_MainTex, IN.texcoord) + _TextureSampleAdd) * IN.color;
-                float2 p0 = float2(IN.texcoord.x, IN.texcoord.y);
+                float aspect = _TexSize.x / _TexSize.y; // width / height
+                float width = _Width * aspect * 0.5/_TexSize.x;
+                float aaWidth = (width * _Softness);
 
-                for (int i = 0; i < numPts-1; i++) {
-                    float2 p1 = float2(points[i*2], points[i*2 + 1]);
-                    float2 p2 = float2(points[(i+1)*2], points[(i+1)*2 + 1]);
+                float4 lineCol = _Color;
+                float4 lineColA0 = _Color;
+                lineColA0.a = 0;
+                float4 result = lineColA0;
 
-                    if (distFromLine(p0, p1, p2, _Width) < _Width) return float4(1, 1, 1, 1);
+                float2 p0 = float2(IN.texcoord.x * aspect, IN.texcoord.y);
+
+                for (int i = 0; i < 3; i++) {
+                    float2 p1 = float2(pts[i*2] * aspect, pts[i*2 + 1]);
+                    float2 p2 = float2(pts[(i+1)*2] * aspect, pts[(i+1)*2 + 1]);
+
+                    float dist = distFromLine(p0, p1, p2, width);
+                    if (dist < width+aaWidth) {
+                        float a = smoothstep(width-aaWidth, width+aaWidth, dist);
+                        float4 tmp = lerp(lineCol, lineColA0, a);
+                        if (tmp.a > result.a) result = tmp;
+                    }
                 }
 
-                #ifdef UNITY_UI_CLIP_RECT
-                color.a *= UnityGet2DClipping(IN.worldPosition.xy, _ClipRect);
-                #endif
-
-                #ifdef UNITY_UI_ALPHACLIP
-                clip (color.a - 0.001);
-                #endif
-
-                return color;
+                return result;
             }
         ENDCG
         }

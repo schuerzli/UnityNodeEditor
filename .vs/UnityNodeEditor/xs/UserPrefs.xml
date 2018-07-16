@@ -1,0 +1,19 @@
+﻿<Properties StartupConfiguration="{500F83C3-06B1-211B-B473-B7A0F582239F}|">
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Editor/NodeEditorConfig.cs">
+    <Files>
+      <File FileName="Assets/Editor/NodeEditorWindow.cs" Line="1" Column="1" />
+      <File FileName="Assets/Editor/NodeEditorConfig.cs" Line="86" Column="47" />
+      <File FileName="Assets/Scripts/Node.cs" Line="280" Column="34" />
+      <File FileName="Assets/Scripts/Plug.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/ShaderArrayFiller.cs" Line="37" Column="1" />
+      <File FileName="Assets/Resources/DrawLine.shader" Line="139" Column="46" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>

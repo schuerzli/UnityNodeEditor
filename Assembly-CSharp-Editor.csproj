@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{75A043D9-EEC7-7E26-1A5F-BC95BC02C046}</ProjectGuid>
+    <ProjectGuid>{E4956432-087C-5340-B55B-C9DC4B743A51}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
@@ -58,18 +58,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\coAdjoint\Action\Editor\ActionAssetEditor.cs" />
-    <Compile Include="Assets\coAdjoint\Action\Editor\ActionLibraryCreation.cs" />
-    <Compile Include="Assets\coAdjoint\Action\Editor\ActionMenu.cs" />
-    <Compile Include="Assets\coAdjoint\Action\Editor\ActionNetworkEditorInspector.cs" />
     <Compile Include="Assets\Editor\NodeEditorConfig.cs" />
     <Compile Include="Assets\Editor\NodeEditorWindow.cs" />
     <Compile Include="Assets\Editor\NodePropertyDrawer.cs" />
     <Reference Include="UnityEditor.StandardEvents">
-      <HintPath>/Users/philboy/Documents/MyGames/unityFun/SolarWind/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+      <HintPath>/Users/philboy/Documents/UnityNodeEditor/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>/Users/philboy/Documents/MyGames/unityFun/SolarWind/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>/Users/philboy/Documents/UnityNodeEditor/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>/Applications/Unity/Hub/Editor/2018.1.0f2/Unity.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -307,12 +303,6 @@
     </Reference>
     <Reference Include="UnityEditor.OSXStandalone.Extensions">
       <HintPath>/Applications/Unity/Hub/Editor/2018.1.0f2/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="ACE">
-      <HintPath>/Users/philboy/Documents/MyGames/unityFun/SolarWind/Assets/coAdjoint/Action/ACE.dll</HintPath>
-    </Reference>
-    <Reference Include="ExampleLibraryBuild">
-      <HintPath>/Users/philboy/Documents/MyGames/unityFun/SolarWind/Assets/coAdjoint/Action/Builds/ExampleLibraryBuild.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.Advertisements">
       <HintPath>/Users/philboy/Library/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.7/Editor/UnityEditor.Advertisements.dll</HintPath>
@@ -677,7 +667,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{F6083BB1-9A20-4298-6614-779A706464A1}</Project>
+      <Project>{500F83C3-06B1-211B-B473-B7A0F582239F}</Project>
       <Name>Assembly-CSharp</Name>
     </ProjectReference>
   </ItemGroup>

@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{F6083BB1-9A20-4298-6614-779A706464A1}</ProjectGuid>
+    <ProjectGuid>{500F83C3-06B1-211B-B473-B7A0F582239F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -58,38 +58,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\coAdjoint\Action\ActionAsset.cs" />
-    <Compile Include="Assets\coAdjoint\Action\ActionClassGenerator.cs" />
-    <Compile Include="Assets\coAdjoint\Action\ActionCompiler.cs" />
-    <Compile Include="Assets\coAdjoint\Action\ActionConnection.cs" />
-    <Compile Include="Assets\coAdjoint\Action\ActionConnectionCreation.cs" />
-    <Compile Include="Assets\coAdjoint\Action\ActionEditor.cs" />
-    <Compile Include="Assets\coAdjoint\Action\ActionLibrary.cs" />
-    <Compile Include="Assets\coAdjoint\Action\ActionLibraryExplorer.cs" />
-    <Compile Include="Assets\coAdjoint\Action\ActionNetwork.cs" />
-    <Compile Include="Assets\coAdjoint\Action\ActionNetworkCreation.cs" />
-    <Compile Include="Assets\coAdjoint\Action\ActionNetworkEditor.cs" />
-    <Compile Include="Assets\coAdjoint\Action\ActionResources.cs" />
-    <Compile Include="Assets\coAdjoint\Action\ActionSkill.cs" />
-    <Compile Include="Assets\coAdjoint\Action\ActionSkillCreation.cs" />
-    <Compile Include="Assets\coAdjoint\Action\ActionSkillPreview.cs" />
-    <Compile Include="Assets\coAdjoint\Action\CoAdjointProjectAsset.cs" />
-    <Compile Include="Assets\coAdjoint\Action\EditorTwoVector.cs" />
-    <Compile Include="Assets\coAdjoint\Action\EditorZoomArea.cs" />
-    <Compile Include="Assets\coAdjoint\Action\RectExtensions.cs" />
     <Compile Include="Assets\Scripts\CustomAttributes.cs" />
     <Compile Include="Assets\Scripts\Node.cs" />
     <Compile Include="Assets\Scripts\Plug.cs" />
     <Compile Include="Assets\Scripts\ShaderArrayFiller.cs" />
     <Compile Include="Assets\Scripts\TestClasses.cs" />
-    <None Include="Assets\coAdjoint\Action\Exports\ExampleLibrary.xml" />
     <None Include="Assets\Resources\WeirdWeb.shader" />
     <None Include="Assets\Resources\DrawLine.shader" />
     <Reference Include="UnityEditor.StandardEvents">
-      <HintPath>/Users/philboy/Documents/MyGames/unityFun/SolarWind/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+      <HintPath>/Users/philboy/Documents/UnityNodeEditor/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>/Users/philboy/Documents/MyGames/unityFun/SolarWind/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>/Users/philboy/Documents/UnityNodeEditor/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>/Applications/Unity/Hub/Editor/2018.1.0f2/Unity.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -285,12 +265,6 @@
     </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>/Applications/Unity/Hub/Editor/2018.1.0f2/Unity.app/Contents/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
-    </Reference>
-    <Reference Include="ACE">
-      <HintPath>/Users/philboy/Documents/MyGames/unityFun/SolarWind/Assets/coAdjoint/Action/ACE.dll</HintPath>
-    </Reference>
-    <Reference Include="ExampleLibraryBuild">
-      <HintPath>/Users/philboy/Documents/MyGames/unityFun/SolarWind/Assets/coAdjoint/Action/Builds/ExampleLibraryBuild.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Analytics">
       <HintPath>/Users/philboy/Library/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
